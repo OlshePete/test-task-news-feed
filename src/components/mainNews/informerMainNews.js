@@ -3,9 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import imageTest from '../img/imageTest.jpg';
+import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,9 +38,8 @@ export default function InformerMainNews(props) {
   const text = informer.text.split(". ")
 
   return (
-
-
     <Card elevation={0} className={classes.root}>
+      <Link href={informer.url}>
       <CardContent className={classes.content}>
         <CardMedia
           className={classes.media}
@@ -61,7 +59,7 @@ export default function InformerMainNews(props) {
             })
           }
         </Typography>
-      </CardContent>
+      </CardContent></Link>
     </Card>
   );
 }

@@ -2,12 +2,17 @@
 .App {
     display: flex;
     flex-wrap:nowrap;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow-y: auto;
   }
-  body{
+   * {
+    font-family: "PT Serif",Georgia,Times New Roman,Times,serif !important;
+  }
+ .app-content p{
+    /* color:#444; */
+    /* color: ##E33E7F'; */
+    font-family: "PT Serif",Georgia,Times New Roman,Times,serif;
   }

@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ToolbarTop from './toolbar-top';
-import ViewFreshNewsHeaders from './viewFreshNewsHeaders';
-import ViewPopularCategoriesNews from './viewPopularCategoriesNews';
-import FooterBottom from './footer-bottom';
-import { useDispatch, useSelector } from 'react-redux';
-import MainNews from './mainNews';
+import ToolbarTop from '../toolbar-top/toolbar-top';
+import ViewFreshNewsHeaders from './fresh-news/viewFreshNewsHeaders';
+import ViewPopularCategoriesNews from './popular-paragraph/viewPopularCategoriesNews';
+import FooterBottom from '../footer/footer-bottom';
+import { useSelector } from 'react-redux';
+import MainNews from '../mainNews/mainNews';
+import ViewShapitoNews from './shapito/viewShapitoNews';
+import ViewOtherNews from './other-news/viewMainNewsText';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     minHeight: "100%",
     width: "100%",
+    "& a":{
+      borderBottom:"none !important",
+      padding:"0px !important",
+      "& :hover":{
+        color:"red"
+      },
+    },
   },
   content: {
     display: "flex",
@@ -30,11 +39,6 @@ const useStyles = makeStyles((theme) => ({
     height:"100%"
 
   },
-  mainList:{
-  },
-  mainNews:{
-    
-  }
 }));
 
 export default function Content() {
@@ -65,9 +69,12 @@ export default function Content() {
 
         <div className={classes.content}>
 
-          <div className={classes.mainList} style={{ backgroundColor: "inherit", width: "500px", minHeight: "100vh", flex: 2, display: "flex", flexDirection: "column" }} >
-            {arr ? <ViewFreshNewsHeaders props={data.arr} /> : <h1>ViewFreshNewsHeaders LIST EMPTY</h1>}
+          <div className={classes.mainList} style={{  minHeight: "100vh", flex: 2, display: "flex", flexDirection: "column" }} >
+            {arr ?  <ViewFreshNewsHeaders props={data.arr} /> : <h1>ViewFreshNewsHeaders LIST EMPTY</h1>}
             {arr ?  <ViewPopularCategoriesNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+            {arr ?  <ViewShapitoNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+            {arr ?  <ViewOtherNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+          
           </div>
 
           <div className={classes.mainNews} style={{width: "500px", minHeight: "100%", flex: 1 }} >

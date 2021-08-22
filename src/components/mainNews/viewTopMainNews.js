@@ -1,12 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import imageTest from '../img/imageTest.jpg';
-import { CardHeader } from '@material-ui/core';
+import { CardHeader, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTypography-root": {
       padding:"15px 5px",
       fontWeight:"500",
-      borderBottom:"1px solid #e1e0d7"
+      borderBottom:"1px solid #e1e0d7",
+    "& :last-child":{
+      // backgroundColor: "red",
     },
-    "& .MuiTypography-root *::last-child":{
-      backgroundColor: "red",
     },
     display: "flex",
     flexDirection:"column",
@@ -55,9 +52,9 @@ export default function ViewTopMainNews(props) {
     <Card elevation={0} className={classes.root}>
       <CardHeader
         title="Главные новости"
-      />
+      />      
       <CardContent className={classes.content}>
-        {topNewsList.map((element) => {  return <Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>{element.title}</Typography> })}
+        {topNewsList.map((element) => { return <Link className={classes.limk} href={`http://meduza.io/${element.url}`}><Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>{element.title}</Typography> </Link>})}
       </CardContent>
     </Card>
   );

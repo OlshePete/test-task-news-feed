@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InformerMainNews from './informerMainNews';
+import ViewMainNewsImg from './viewMainNewsImg';
+import ViewMainNewsText from './viewMainNewsText';
 import ViewTopMainNews from './viewTopMainNews';
-import ViewNewHeaderGiant from './viewNewHeaderGiant';
-import ViewNewMini from './viewNewHeaderMini'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,27 +16,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 export default function MainNews(props) {
   const classes = useStyles();
-  // console.log(props.props.feature)
 
-  let freshNewsList = [];
-  props.props.news.forEach(element => { if (element.version !== 1) freshNewsList.push(element) });
+  console.log("props.props", props.props.feature)
+  let featureList = props.props.feature;
+
+  let newsList = [];
+  props.props.news.forEach(element => { if (element.version !== 1) newsList.push(element) });
 
   return (
     <div className={classes.root} style={{ minHeight: "inherit" }}>
 
       <InformerMainNews elevation={0} props={props.props.informer} />
       <ViewTopMainNews props={props.props.news} />
-
-      {           props.props.feature.map((element) => {
-        return <ViewNewHeaderGiant item={element} key={element.datetime} />
-      })
-      }
-      {           freshNewsList.slice(7).map((element) => {
-        return <ViewNewMini key={element.datetime} props={element} />
-      })
-      }
+      {featureList.map((element) => {
+        if (featureList.lastIndexOf(element) % 2) return <ViewMainNewsText key={element.datetime} props={element} />; else return <ViewMainNewsImg item={element} key={element.datetime} />
+      })}
     </div>
   );
 
