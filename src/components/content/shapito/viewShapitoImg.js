@@ -52,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewShapitoImg(item) {
   const classes = useStyles();
   const current = item.item;
-  console.log("current",current)
   const image1 = `https://meduza.io/${current.image.base_urls.is1to2}`;
   return (
     <Card className={classes.root}>

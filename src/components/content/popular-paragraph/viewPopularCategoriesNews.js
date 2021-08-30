@@ -54,31 +54,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ViewPopularCategoriesNews(props) {
+export default function ViewPopularCategoriesNews({data}) {
   const classes = useStyles();
 
-  const [arrState, setArrState] = React.useState(props.props);
-  console.log("ViewPopularCategoriesNews", props.props)
-  console.log("ViewPopularCategoriesNews-arrState", arrState)
+  const arrState = data;
+// arrState.featureforEach(element => {element.feature})
 
+  const image1 = `https://meduza.io${arrState.feature[0].image.base_urls.is1to2}`;
 
-  const image1 = `https://meduza.io${arrState.paragraph[1].image.base_urls.is1to2}`;
-
-  let date = new Date(props.props.datetime * 1000);
+  let date = new Date(data.datetime * 1000);
   let resultDate = date.toString().match(/[0-9]{2}:[0-9]{2}/);
 
   return (
     <Card className={classes.root}>
-      <Link href={`http://meduza.io/${arrState.paragraph[1].url}`}>
+      <Link href={`http://meduza.io/${arrState.feature[0].url}`}>
       <CardContent className={classes.content}>
         <CardMedia
           className={classes.media}
           image={image1}
-          title={arrState.paragraph[1].title}
+          title={arrState.feature[0].title}
         />
         <div className={classes.info}>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.section}>
-            {arrState.paragraph[1].tag.name}
+            {arrState.feature[0].tag.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.data}>
             — {resultDate}
@@ -86,10 +84,10 @@ export default function ViewPopularCategoriesNews(props) {
         </div>
         <div className={classes.info}>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>
-            {arrState.paragraph[1].title}
+            {arrState.feature[0].title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.newsText}>
-            {arrState.paragraph[1].second_title}
+            {arrState.feature[0].second_title}
           </Typography>
         </div>
 

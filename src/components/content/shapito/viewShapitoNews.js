@@ -8,12 +8,8 @@ const useStyles = makeStyles(() => ({
     paddingLeft: 0,
     paddingBottom: "15px",
     boxShadow: 'none',
-    // maxHeight: 900,
     order: "1",
     overflow: "hidden",
-    // display: "flex",
-    // flexDirection: "column",
-    // flexWrap: "wrap",
   },
   content: {
     paddingLeft: 0,
@@ -22,13 +18,13 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     display: "flex",
     flexWrap: "nowrap",
-    flexDirection: "column",
+    flexDirection: "column-reverse",
   },
 }));
 
-export default function ViewShapitoNews(props) {
+export default function ViewShapitoNews({data}) {
   const classes = useStyles();
-  const current = props.props.shapito;
+  const current = data.shapito;
   return (
 
     <div className={classes.root} >

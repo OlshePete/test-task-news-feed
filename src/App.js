@@ -11,14 +11,18 @@ import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
 
 function App() {
 
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(getData());
-  }, [])
+  }, [dispatch])
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+  }, []);
 
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const dispatch = useDispatch();
 
   const loadingDataStatus = useSelector((state) => state.must.loadingDataStatus);
 
@@ -31,19 +35,10 @@ function App() {
   });
 
   const toggleVisibility = () => {
-    console.log("window.pageYOffset", window.pageYOffset)
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
+  //   console.log("window.pageYOffset", window.pageYOffset)
+    if (window.pageYOffset > 300) {setIsVisible(true);} else {setIsVisible(false);}
   };
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-  }, []);
-  // Set the top cordinate to 0
-  // make scrolling smooth
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -54,50 +49,19 @@ function App() {
   if (!loadingDataStatus) {
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="App" style={{ flexDirection: "flex-start" }}>
+        <div className="App" >
           <div style={{ backgroundColor: "grey", order: "-1" }}>
-            <Skeleton animation={true} className="app-drawer" variant="text" height="100%" width={240} />
+            <Skeleton className="app-drawer" variant="text" height="100%" width={240} />
           </div>
           <div className="app-content" style={{ backgroundColor: "lightgrey", width: "100%", flexWrap: "wrap", overflow: "hidden" }}>
-            <Skeleton animation={true} style={{ marginRight: "auto" }} variant="text" width="auto" height={120}><h1>DATA LOADING</h1></Skeleton>
-
-
-            <Box display="flex" alignItems="center" flexDirection="column" width="80%">
+            <Skeleton style={{ marginRight: "auto" }} variant="text" width="auto" height={120}><h1>DATA LOADING</h1></Skeleton>
 
               <Box width="100%">
-                <Skeleton animation={true} width="100%">
+                <Skeleton width="100%">
                   <Typography>......</Typography>
                 </Skeleton>
               </Box>
-              <Box width="100%">
-                <Skeleton animation={true} variant="rect" width="100%">
-                  <div style={{ paddingTop: '57%', justifyContent: "space-between" }} />
-                </Skeleton>  </Box>
-            </Box>
-            <Box display="flex" alignItems="center" flexDirection="column" width="80%">
-
-              <Box width="100%">
-                <Skeleton animation={true} width="100%">
-                  <Typography>......</Typography>
-                </Skeleton>
-              </Box>
-              <Box width="100%">
-                <Skeleton animation={true} variant="rect" width="100%">
-                  <div style={{ paddingTop: '57%' }} />
-                </Skeleton>  </Box>
-            </Box>
-            <Box display="flex" alignItems="center" flexDirection="column" width="80%">
-
-              <Box width="100%">
-                <Skeleton animation={true} width="100%">
-                  <Typography>......</Typography>
-                </Skeleton>
-              </Box>
-              <Box width="100%">
-                <Skeleton animation={true} variant="rect" width="100%">
-                  <div style={{ paddingTop: '57%' }} />
-                </Skeleton>  </Box>
-            </Box>
+             
           </div>
         </div>
       </MuiThemeProvider>
@@ -106,16 +70,20 @@ function App() {
     return (
       <MuiThemeProvider theme={theme}>
         <div className="App">
-          <div className="app-drawer" style={{ display: "flex" }}>
+          <div className="app-drawer">
             <PermanentDrawerLeft />
           </div>
-          <div className="app-content" style={{ maxWidth: "1000px" }}>
+          <div className="app-content">
             <Content />
           </div>
-          <div className="scroll-to-top">
+          <div>
             {isVisible &&
-              <div onClick={scrollToTop} style={{ position: "fixed", top: 50, paddingLeft: 20 }}>
-                <ArrowUpwardOutlinedIcon color="action" fontSize="large" /></div>}
+              <div onClick={scrollToTop}  className="scroll-to-top">
+                <ArrowUpwardOutlinedIcon
+                  color="action" 
+                  fontSize="large" 
+                />
+                </div>}
           </div>
         </div>
       </MuiThemeProvider>

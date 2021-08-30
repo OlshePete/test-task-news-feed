@@ -6,7 +6,7 @@ import ViewMainNewsText from './viewMainNewsText';
 import ViewTopMainNews from './viewTopMainNews';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 
   root: {
     display: "flex",
@@ -16,23 +16,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
-export default function MainNews(props) {
+export default function MainNews({data}) {
   const classes = useStyles();
-
-  console.log("props.props", props.props.feature)
-  let featureList = props.props.feature;
+  let featureList = data.feature;
 
   let newsList = [];
-  props.props.news.forEach(element => { if (element.version !== 1) newsList.push(element) });
+
+  data.news.forEach(element => { if (element.version !== 1) newsList.push(element) });
 
   return (
     <div className={classes.root} style={{ minHeight: "inherit" }}>
 
-      <InformerMainNews elevation={0} props={props.props.informer} />
-      <ViewTopMainNews props={props.props.news} />
+      <InformerMainNews elevation={0} props={data.informer} />
+      <ViewTopMainNews props={data.news} />
       {featureList.map((element) => {
         if (featureList.lastIndexOf(element) % 2) return <ViewMainNewsText key={element.datetime} props={element} />; else return <ViewMainNewsImg item={element} key={element.datetime} />
       })}

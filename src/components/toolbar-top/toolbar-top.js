@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     order: "1" ,
     borderBottom: "5px solid black"
   },
-  toolbar: theme.mixins.toolbar,
   toolbar: {
     display: "flex",
     flexDirection: "row",
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase"
   },
 }));
-// backgroundColor: "brown",  order: "1" 
+
 const getMonthName = (month) => {
   switch (month) {
     case 0:
@@ -66,12 +65,12 @@ const getMonthName = (month) => {
 export default function ToolbarTop() {
   const classes = useStyles();
 
-  const [dateNow, setDateNow] = React.useState(new Date());
+  const dateNow=new Date();
   return (
     <div className={classes.root}>
       <div className={classes.toolbar}>
         <div className={classes.logo}>  LENTA.RU</div>
-        <div className={classes.date} id="date-time">{`${dateNow.getDate()} ${getMonthName(dateNow.getMonth())}, ${dateNow.getHours() < 10 ? "0" + dateNow.getHours() : dateNow.getHours()}:${dateNow.getMinutes() < 10 ? "0" + dateNow.getMinutes() : dateNow.getMinutes()} `}</div>
+        <div className={classes.date} key={"data-current"}id="date-time">{`${dateNow.getDate()} ${getMonthName(dateNow.getMonth())}, ${dateNow.getHours() < 10 ? "0" + dateNow.getHours() : dateNow.getHours()}:${dateNow.getMinutes() < 10 ? "0" + dateNow.getMinutes() : dateNow.getMinutes()} `}</div>
       </div>
     </div>
   );

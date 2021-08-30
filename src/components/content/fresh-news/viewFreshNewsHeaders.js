@@ -2,16 +2,15 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ViewNewHeaderGiant from './viewNewHeaderGiant';
 import ViewNewMini from './viewNewHeaderMini'
-import { Link } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
 
-  root: {    
+  root: {
     paddingLeft: 0,
     paddingBottom: "15px",
     boxShadow: 'none',
     maxHeight: 650,
-    order:"1",
+    order: "1",
     overflow: "hidden",
   },
   content: {
@@ -22,28 +21,25 @@ const useStyles = makeStyles(() => ({
     paddingBottom: "15px",
     boxShadow: 'none',
     maxHeight: 650,
-    width:"50%",
+    width: "50%",
   },
 }));
 
-export default function ViewFreshNewsHeaders(props) {
+export default function ViewFreshNewsHeaders({ data }) {
   const classes = useStyles();
-  const [arrState, setArrState] = React.useState(props.props);
-  
+  const arrState = data;
   let freshNewsList = [];
   arrState.news.forEach(element => { if (element.version !== 1) freshNewsList.push(element) });
-console.log(freshNewsList.slice(7))
+
   return (
 
     <div className={classes.root} >
-    <div className={classes.content} >
-      <Link href={`http://meduza.io/${arrState.paragraph[0].url}`}> <ViewNewHeaderGiant item={arrState.paragraph[0]} key={arrState.paragraph[0].datetime}/></Link>
+      <div className={classes.content} >
+        <ViewNewHeaderGiant item={arrState.shapito[0]} key={arrState.shapito[0].datetime} />
         {
-           freshNewsList.slice(0,7).map((element) => {
-            return <Link href={`http://meduza.io/${element.url}`}><ViewNewMini key={element.datetime} props={element} /></Link>
-          })
+          freshNewsList.slice(0, 7).map((element) => <ViewNewMini key={element.datetime} item={element} />)
         }
-    </div> </div>
+      </div> </div>
   );
 
 }

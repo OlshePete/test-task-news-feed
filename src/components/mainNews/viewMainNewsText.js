@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     minHeight: 50,
     maxHeight: 200,
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "15px",
     display: "flex",
     flexDirection: "column",
-    lineHeight: "18px",
   },
   time: {
     display: "inline",
@@ -41,27 +40,21 @@ const useStyles = makeStyles((theme) => ({
     "&:last-child": {
       paddingBottom: 0
     },
-    "&: .MuiTypography-root": {
-
-    },
 
   },
 }));
 
-export default function ViewMainNewsText(props) {
+export default function ViewMainNewsText({props}) {
   const classes = useStyles();
-  const current = props.props;
+  const current = props;
 
   const monthList = useSelector((state) => state.must.monthList);
 
   let date = new Date(current.datetime*1000 );
-
   let resultTime = date.toString().match(/[0-9]{2}:[0-9]{2}/);
-
   let currentDate = date.getMonth();
   let currentDay = date.getDay() + 1;
   let resultDate = "";
-  console.log("currentDay",currentDay)
 
   for (let i = 0; i < monthList.length; i++) {
     const element = monthList[i];
@@ -73,7 +66,7 @@ export default function ViewMainNewsText(props) {
       <Link href={`http://meduza.io/${current.url}`}>
         <CardContent className={classes.content}>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>
-            <Typography variant="body2" color="textSecondary" component="p" className={classes.time}>
+            <Typography variant="body2" color="textSecondary" component="span" className={classes.time}>
               {resultTime} - {resultDate}
           </Typography>
             {current.title}

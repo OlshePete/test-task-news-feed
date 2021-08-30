@@ -7,10 +7,10 @@ import FooterBottom from '../footer/footer-bottom';
 import { useSelector } from 'react-redux';
 import MainNews from '../mainNews/mainNews';
 import ViewShapitoNews from './shapito/viewShapitoNews';
-import ViewOtherNews from './other-news/viewMainNewsText';
+import ViewOtherNews from './other-news/viewOtherNews';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 
   root: {
     display: "flex",
@@ -33,12 +33,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "white",
     flexWrap: "wrap",
-    height: "inherit",
     width: "100%",
     order: 2,
     height:"100%"
-
   },
+  mainList:{
+   minHeight: "100vh", 
+   flex: 2, 
+   display: "flex", 
+   flexDirection: "column"
+  },
+  mainNews:{
+    width: "500px", 
+    minHeight: "100%",
+    flex: 1 
+  }
 }));
 
 export default function Content() {
@@ -48,17 +57,15 @@ export default function Content() {
   const [arr, setArr] = React.useState(false);
 
   React.useEffect(() => {
-    console.log("data useeffect start", data)
   }, [])
 
   React.useEffect(() => {
-    console.log("data useeffect", data)
     setArr(true);
   }, [data])
 
   if (data.data === {}) {
     return (
-      <main className={classes.content} style={{ backgroundColor: "red" }}>
+      <main className={classes.content}>
         <h1>DATA LOADING</h1>
       </main>
     )
@@ -69,16 +76,15 @@ export default function Content() {
 
         <div className={classes.content}>
 
-          <div className={classes.mainList} style={{  minHeight: "100vh", flex: 2, display: "flex", flexDirection: "column" }} >
-            {arr ?  <ViewFreshNewsHeaders props={data.arr} /> : <h1>ViewFreshNewsHeaders LIST EMPTY</h1>}
-            {arr ?  <ViewPopularCategoriesNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
-            {arr ?  <ViewShapitoNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
-            {arr ?  <ViewOtherNews props={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+          <div className={classes.mainList}  >
+            {arr ?  <ViewFreshNewsHeaders data={data.arr} /> : <h1>ViewFreshNewsHeaders LIST EMPTY</h1>}
+            {arr ?  <ViewPopularCategoriesNews data={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+            {arr ?  <ViewShapitoNews data={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
+            {arr ?  <ViewOtherNews data={data.arr} /> : <h1>ViewPopularCategoriesNews LIST EMPTY</h1>}
           
           </div>
-
-          <div className={classes.mainNews} style={{width: "500px", minHeight: "100%", flex: 1 }} >
-          <MainNews  props={data.arr} />
+          <div className={classes.mainNews} >
+          <MainNews  data={data.arr} />
           </div>
           
         </div>

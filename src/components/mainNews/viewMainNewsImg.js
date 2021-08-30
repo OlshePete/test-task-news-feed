@@ -49,9 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ViewMainNewsImg(item) {
+export default function ViewMainNewsImg({item}) {
   const classes = useStyles();
-  const current = item.item;
+  const current = item;
   const image1 = `https://meduza.io/${current.image.base_urls.is1to2}`;
   return (
     <Card className={classes.root}>

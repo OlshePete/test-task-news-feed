@@ -45,7 +45,6 @@ export default function ViewTopMainNews(props) {
   const classes = useStyles();
   let topNewsList = [];
   props.props.forEach(element => { if (element.version === 1) topNewsList.push(element) });
-  console.log("topNewsList", topNewsList[0].url)
 
   return (
 

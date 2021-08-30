@@ -1,4 +1,6 @@
-
+* {
+    font-family: "PT Serif",Georgia,Times New Roman,Times,serif !important;
+  }
 .App {
     display: flex;
     flex-wrap:nowrap;
@@ -8,11 +10,15 @@
     height: 100%;
     overflow-y: auto;
   }
-   * {
-    font-family: "PT Serif",Georgia,Times New Roman,Times,serif !important;
+  .app-drawer {
+     display: flex 
+    }
+  .app-content { 
+    max-width: 1000px 
   }
- .app-content p{
-    /* color:#444; */
-    /* color: ##E33E7F'; */
-    font-family: "PT Serif",Georgia,Times New Roman,Times,serif;
+  .scroll-to-top {
+    position: fixed;
+    cursor: pointer;
+    top: 50px;
+    padding-left: 50px 
   }

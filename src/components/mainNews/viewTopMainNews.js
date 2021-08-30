@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { CardHeader, Link } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     "& .MuiCardHeader-root": {
       backgroundColor: "#eae9da",
@@ -26,35 +26,34 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     "& .MuiTypography-root": {
-      padding:"15px 5px",
-      fontWeight:"500",
-      borderBottom:"1px solid #e1e0d7",
-    "& :last-child":{
-      // backgroundColor: "red",
-    },
+      padding: "15px 5px",
+      fontWeight: "500",
+      borderBottom: "1px solid #e1e0d7",
     },
     display: "flex",
-    flexDirection:"column",
+    flexDirection: "column",
     padding: "5px",
     backgroundColor: "inherit",
   },
 }));
 
-export default function ViewTopMainNews(props) {
+export default function ViewTopMainNews({ props }) {
   const classes = useStyles();
   let topNewsList = [];
-  props.props.forEach(element => { if (element.version === 1) topNewsList.push(element) });
-  console.log("topNewsList", topNewsList)
+  props.forEach(element => { if (element.version === 1) topNewsList.push(element) });
 
   return (
-
-
     <Card elevation={0} className={classes.root}>
-      <CardHeader
-        title="Главные новости"
-      />      
+      <CardHeader title="Главные новости" />
       <CardContent className={classes.content}>
-        {topNewsList.map((element) => { return <Link className={classes.limk} href={`http://meduza.io/${element.url}`}><Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>{element.title}</Typography> </Link>})}
+        {topNewsList.map((element, index) => {
+          return(
+          <Link key ={index} className={classes.limk} href={`http://meduza.io/${element.url}`}>
+            <Typography key ={element.datetime} variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>
+              {element.title}
+            </Typography>
+          </Link>)
+        })}
       </CardContent>
     </Card>
   );

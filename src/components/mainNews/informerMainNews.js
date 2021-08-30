@@ -32,34 +32,35 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function InformerMainNews(props) {
+export default function InformerMainNews({ props }) {
   const classes = useStyles();
-  const informer = props.props
+  const informer = props
   const text = informer.text.split(". ")
 
   return (
     <Card elevation={0} className={classes.root}>
       <Link href={informer.url}>
-      <CardContent className={classes.content}>
-        <CardMedia
-          className={classes.media}
-          image={informer.icon_url}
-          title={informer.text}
-        />
-        <Typography variant="body2" color="textSecondary" component="p" className={classes.newsHeader}>
-          {
-            text.map((element) => {
-              if (text.indexOf(element) === 0) {
-                return <Typography variant="body2" color="textSecondary" component="p" style={{ fontWeight: "700", color: "black", fontSize: "1.5em" }}>
+        <CardContent className={classes.content}>
+          <CardMedia
+            className={classes.media}
+            image={informer.icon_url}
+            title={informer.text}
+          />
+          <Typography variant="body2" color="textSecondary" component="div" className={classes.newsHeader}>
+            {
+              text.map((element,index) => {
+                if (text.indexOf(element) === 0) {
+                  return <Typography key={index} variant="body2" color="textSecondary" component="p" style={{ fontWeight: "700", color: "black", fontSize: "1.5em" }}>
+                    {element}
+                  </Typography>
+                } else return <Typography key={index} variant="body2" color="textSecondary" component="p">
                   {element}
                 </Typography>
-              } else return <Typography variant="body2" color="textSecondary" component="p">
-                {element}
-              </Typography>
-            })
-          }
-        </Typography>
-      </CardContent></Link>
+              })
+            }
+          </Typography>
+        </CardContent>
+      </Link>
     </Card>
   );
 }
